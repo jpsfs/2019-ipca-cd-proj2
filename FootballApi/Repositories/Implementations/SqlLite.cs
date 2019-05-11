@@ -13,10 +13,12 @@ namespace FootballApi.Repositories.Implementations
         static string assemblyFile = Path.GetDirectoryName(new System.Uri(Assembly.GetExecutingAssembly().CodeBase).AbsolutePath);
 
         public static SqliteConnection GetConnection() {
+            string path = Path.GetFullPath(Path.Join(assemblyFile, "../../../../sport.db")).Replace("%20", " ").Replace("%C3%A3", "ã");
+
             var connection = new SqliteConnection(
                 new SqliteConnectionStringBuilder
                 {
-                    DataSource = Path.Join(assemblyFile, "../../../../sport.db")
+                    DataSource = path
                 }.ToString()   
             );
 
